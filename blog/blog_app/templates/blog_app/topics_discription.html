@@ -1,0 +1,66 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/topics.css' %}">
+</head>
+<body>
+{% csrf_token %}
+<header>
+    <div class="container1">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <a class="img-user-a-discription" href="http://127.0.0.1:8000/{{ username_csrftoken }}/"><img class="img-user-discription" src="{{ user_profile_photo }}" alt=""></a>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<form action="/topics/{{ username }}/created" method="post" enctype="multipart/form-data">
+    <div id="custom-file-upload">
+        <label for="file-input" class="custom-file-label">Оберіть файл</label>
+        <input type="file" id="file-input" name="photo" class="post_input" onchange="showImage(this)">
+        <img id="selected-image" src="#" alt="Обране зображення" style="display: none;">
+        <h3 id="text-h" >Напишіть назву теми</h3>
+        <textarea  id="text-input" name="name" required></textarea>
+        <p id="text-input-p" >{{ error }}</p>
+        <script>
+            function showImage(input) {
+              var file = input.files[0];
+              var img = document.getElementById('selected-image');
+              var label = document.querySelector('.custom-file-label');
+            
+              if (file) {
+                var reader = new FileReader();
+            
+                reader.onload = function(e) {
+                  img.src = e.target.result;
+                  img.style.display = 'block';
+                  label.textContent = file.name;
+                  document.getElementById('text-h').style.top = '-170px';
+                  document.getElementById('text-input').style.top = '-180px';
+                  document.getElementById('text-input-p').style.top = '-190px';
+                }
+            
+                reader.readAsDataURL(file);
+              } else {
+                img.src = '#';
+                img.style.display = 'none';
+                label.textContent = 'Оберіть файл';
+              }
+            }
+        </script>
+    </div>
+    <div id="custom-file-upload-2">
+        <textarea name="discription" id="post_input3" required></textarea>
+    </div>
+    <button class="butt-publish" >Publish</button>
+</form>
+
+</body>
+</html>
+

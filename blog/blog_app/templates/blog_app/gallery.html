@@ -1,0 +1,117 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/gallery.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+{% csrf_token %}
+<header>
+    <div class="container1">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><button onclick="showCode()">Add Photo</button></li>
+                <form action="/{{ username }}/post_gallery/" method="post" enctype="multipart/form-data">
+                <div id="custom-file-upload">
+                    <label for="file-input" class="custom-file-label">Оберіть файл</label>
+                    <input type="file" id="file-input" name="photo" class="post_input" onchange="showImage(this)">
+                    <img id="selected-image" src="#" alt="Обране зображення" style="display: none;">
+                    <button class="butt-publish">Add</button>
+                </div>
+                
+                
+                <script>
+                    function showImage(input) {
+                      var file = input.files[0];
+                      var img = document.getElementById('selected-image');
+                      var label = document.querySelector('.custom-file-label');
+                    
+                      if (file) {
+                        var reader = new FileReader();
+                    
+                        reader.onload = function(e) {
+                          img.src = e.target.result;
+                          img.style.display = 'block';
+                          label.textContent = file.name;
+                        }
+                    
+                        reader.readAsDataURL(file);
+                      } else {
+                        img.src = '#';
+                        img.style.display = 'none';
+                        label.textContent = 'Оберіть файл';
+                      }
+                    }
+                </script>
+                </form>
+                <div id="overlay" onclick="hideCode()"></div>
+                <script>
+                    function showCode() {
+                        document.getElementById('custom-file-upload').style.display = 'block';
+                        document.getElementById('overlay').style.display = 'block';
+                    }
+            
+                    function hideCode() {
+                        document.getElementById('custom-file-upload').style.display = 'none';
+                        document.getElementById('overlay').style.display = 'none';
+                    }
+                </script>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container2">
+
+    <div class="gallery">
+        {% for all in photo_profile_tags %}
+        <figure class="photo-item">
+            <div class="photo">
+                <button class="butt-photo" onclick="showCodes('{{ forloop.counter }}')">
+                    <img src="../../static/blog_app/img/{{ all.photo }}" alt="Photo {{ forloop.counter }}">
+                    <p class="tag-photo">{{ all.tag }}</p>
+                </button>
+            </div>
+            <div class="photos" id="photo-gallery-{{ forloop.counter }}">
+                <form class="form1" action="/{{ username }}/gallery-delete/" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="photo" value="{{ all.photo }}">
+                    <button class="trash-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-8zM4.118 4a1 1 0 0 1 .876-.707h6.012a1 1 0 0 1 .876.707L12.5 4.5h1a.5.5 0 0 1 0 1h-11a.5.5 0 0 1 0-1h1l.618-.5zM2.5 5.5a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 .5.5v8A2.5 2.5 0 0 1 11 16H5a2.5 2.5 0 0 1-2.5-2.5v-8z"/>
+                        </svg>
+                    </button> 
+                </form>
+                <form class="form2" action="/{{ username }}/gallery-tag/" method="post" enctype="multipart/form-data">
+                    <p class="p-tag">Add Tag</p>
+                    <input class="input-tag" type="text" name="tag">
+                    <input type="hidden" name="photo" value="{{ all.photo }}">
+                    <button class="hashtag-btn">#</button>                 
+                </form>
+                <img src="../../static/blog_app/img/{{ all.photo }}" alt="Photo {{ forloop.counter }}">
+            </div>
+            <div id="overlays-{{ forloop.counter }}" class="overlays" onclick="hideCodes('{{ forloop.counter }}')"></div>
+        </figure>
+        {% endfor %}
+        
+        <script>
+            function showCodes(photoIndex) {
+                document.getElementById('photo-gallery-' + photoIndex).style.display = 'block';
+                document.getElementById('overlays-' + photoIndex).style.display = 'block';
+            }
+        
+            function hideCodes(photoIndex) {
+                document.getElementById('photo-gallery-' + photoIndex).style.display = 'none';
+                document.getElementById('overlays-' + photoIndex).style.display = 'none';
+            }
+        </script>
+          
+    </div>
+</div>
+
+</body>
+</html>

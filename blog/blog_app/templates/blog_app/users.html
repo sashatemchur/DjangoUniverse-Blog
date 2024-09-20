@@ -1,0 +1,53 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/users.css' %}">
+</head>
+<body>
+{% csrf_token %}
+<header>
+    <div class="container1">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/topics">Topics</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container2">
+    <div class="profile">
+        <img src={{ photo }}>
+        <div class="profile-info">
+            <h2>{{ username }}</h2>
+            <p>{{ name }}</h2>
+            <p>{{ discription }}</p>
+        </div>
+        <form action="/chats/{{ username }}/check" method="post" enctype="multipart/form-data">
+            <button class="butt-write">Write</button>
+        </form>
+    </div>
+
+    
+    <div class="gallery">
+        {% for photo in photo_profile %}
+        <figure class="photo-item">
+            <form action="post/place/{{ photo }}" method="post" enctype="multipart/form-data">
+            <div class="photo">
+                <button class="butt-photo">
+                    <img src="../../static/blog_app/img/{{ photo }}" alt="Photo {{ forloop.counter }}">
+                </button>
+            </div>
+            </form>
+        </figure>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

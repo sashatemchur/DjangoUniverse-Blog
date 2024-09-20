@@ -1,0 +1,89 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/photos.css' %}">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+{% csrf_token %}
+<header>
+    <div class="container1">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/edit_profile/{{ username }}/">Settings</a></li>
+                <li>
+                    <form action="/{{ username }}/{{ id_photo }}/post" method="post" enctype="multipart/form-data" class="button-form">
+                    <button>Delete Post</button>
+                    </form>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div class="image-section">
+        <img src="../../static/blog_app/img/{{ this_photo }}" alt="Зображення" class="image">
+        <div class="buttons">
+            <strong class="like-count">{{ count_like }}</strong>
+            <form action="/{{ username }}/post/{{ id_photo }}/likes" method="post" enctype="multipart/form-data">
+            <button class="like-btn">
+                {% if true_false %}
+                    <i id="heart" class="far fa-heart heart"></i>
+                {% elif true_false == False %}
+                    <i id="heart" class="fa-heart heart filled fas"></i>
+                {% endif %}
+            </button>
+            </form>
+            <button class="comment-btn"><i class="fas fa-comment"></i> Коментарі</button>
+        </div>
+    </div>
+    <div class="comments-section">
+        <div class="comment">
+            {% for comments in comment %}
+                <p class="comment-text">{{ comments|safe }}</p>
+                <form action="/{{ username }}/post/{{ id_photo }}/comment-delete-true-false" method="post" enctype="multipart/form-data"> 
+                    <input type="hidden" name="comment" value="{{ comments }}">
+                    <button id="three-dots" class="fas fa-ellipsis-v three-dots"></button>
+                </form>
+                {% if true_false_delete == True %}
+                    <div id="dots">
+                        <form action="/{{ username }}/post/{{ id_photo }}/comment-delete" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="comment" value="{{ comment_delete }}">
+                            <button class="dots-btn">Delete</button>                       
+                        </form>  
+                        <button onclick="hideCode()" class="dots-btn2">Close</button>    
+                    </div>  
+                    <div id="overlay" onclick="hideCode()"></div>
+                {% elif true_false_delete == False %}
+                    <div id="dots">
+                        <button onclick="hideCode()" class="dots-btn2">Close</button> 
+                    </div>
+                    <div id="overlay" onclick="hideCode()"></div>
+                {% else %}
+                {% endif %}
+                <script>
+                    function hideCode() {
+                        window.location.href = '/{{ username }}/post/{{ id_photo }}';
+                    }
+                </script>
+            {% endfor %}
+        </div>
+        <form action="/{{ username }}/post/{{ id_photo }}/comment" method="post" enctype="multipart/form-data">
+        <div class="comment-input">
+            <input type="text" placeholder="Додати коментар..." name="comment" class="comment-field">
+            <button class="submit-btn">Надіслати</button>
+        </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

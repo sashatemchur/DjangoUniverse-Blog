@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bavilogram</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'blog_app/css/home.css' %}">
+</head>
+<body>
+    {% csrf_token %}
+    <div class="user-login-register">
+        <form class="search-container" onsubmit="handleSearch(event)">
+            <input type="text" name="query" placeholder="Введіть пошуковий запит">
+            <input type="submit" value="Шукати">
+        </form>
+        <script>
+            function handleSearch(event) {
+                event.preventDefault();
+                const query = document.querySelector('input[name="query"]').value;
+                window.location.href = `http://127.0.0.1:8000/${encodeURIComponent(query)}`;
+            }
+        </script>
+        <a href="http://127.0.0.1:8000/{{ username_csrftoken }}/"><img class="img-user" src="{% static 'blog_app/img/' %}{{ user_profile_photo }}" alt=""></a>
+    </div>
+
+    <div class="posts">
+        {% for topic in topics %}
+        <div class="post">
+            <div class="post-header">
+                <a href="http://127.0.0.1:8000/{{ topic.username }}/topic/{{ topic.id_topics }}"><img class="post-profile-pic" src="{% static 'blog_app/img/' %}{{ topic.photo_username }}" alt="{{ topic.name }}"></a>
+                <a href="http://127.0.0.1:8000/{{ topic.username }}/topic/{{ topic.id_topics }}"><span class="post-username">{{ topic.username }}</span></a>
+            </div>
+            <img class="post-photo-topic" src="{% static 'blog_app/img/' %}{{ topic.photo }}" alt="{{ topic.name }}">
+
+            <div class="buttons">
+                <button class="comment-btn"><a href="http://127.0.0.1:8000/{{ topic.username }}/topic/{{ topic.id_topics }}"><i class="fas fa-comment"></i></a> Коментарі</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

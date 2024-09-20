@@ -1,0 +1,125 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/user.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+{% csrf_token %}
+<header>
+    <div class="container1">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/topics">Topics</a></li>
+                <li><a href="/edit_profile/{{ username }}/">Settings</a></li>
+                <li><a href="#window">Logout</a></li>
+                <li>
+                    {% if unread_notifications %}  
+                    <a href="/{{ username }}/notification" class="icon-button">
+                        <span class="material-icons">notifications</span>
+                        <span class="icon-button__badge">{{ unread_notifications }}</span>
+                    </a>
+                    {% else %}
+                    <a href="/{{ username }}/notification" class="icon-button">
+                        <span class="material-icons">notifications</span>
+                    </a>
+                    {% endif %}
+                </li>      
+                <div id="window">
+                    <ul class="ul-go-out">
+                        <form action="/{{ username }}/delete_csrftoken" method="post" enctype="multipart/form-data">
+                            <li><button>Go out</button></li>                         
+                        </form>
+                    </ul>
+                    <ul class="ul-close">
+                        <li><a href="">Close</a></li>
+                    </ul>
+                </div>
+                <li><button onclick="showCode()">Create Post</button></li>
+                <li><a href="/topics/{{ username }}/">Your Topics</a></li>
+                <li><a href="/chats/{{ username }}/">Chats</a></li>
+                <li><a href="/{{ username }}/gallery">Gallery</a></li>
+                <form action="/{{ username }}/post" method="post" enctype="multipart/form-data">
+                <div id="custom-file-upload">
+                    <label for="file-input" class="custom-file-label">Оберіть файл</label>
+                    <input type="file" id="file-input" name="photo" class="post_input" onchange="showImage(this)">
+                    <img id="selected-image" src="#" alt="Обране зображення" style="display: none;">
+                    <button class="butt-publish" >Publish</button>
+                </div>
+                
+                
+                <script>
+                    function showImage(input) {
+                      var file = input.files[0];
+                      var img = document.getElementById('selected-image');
+                      var label = document.querySelector('.custom-file-label');
+                    
+                      if (file) {
+                        var reader = new FileReader();
+                    
+                        reader.onload = function(e) {
+                          img.src = e.target.result;
+                          img.style.display = 'block';
+                          label.textContent = file.name;
+                        }
+                    
+                        reader.readAsDataURL(file);
+                      } else {
+                        img.src = '#';
+                        img.style.display = 'none';
+                        label.textContent = 'Оберіть файл';
+                      }
+                    }
+                </script>
+                </form>
+                <div id="overlay" onclick="hideCode()"></div>
+                <script>
+                    function showCode() {
+                        document.getElementById('custom-file-upload').style.display = 'block';
+                        document.getElementById('overlay').style.display = 'block';
+                    }
+            
+                    function hideCode() {
+                        document.getElementById('custom-file-upload').style.display = 'none';
+                        document.getElementById('overlay').style.display = 'none';
+                    }
+                </script>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container2">
+    <div class="profile">
+        <img src={{ photo }}>
+        <div class="profile-info">
+            <h2>{{ username }}</h2>
+            <p>{{ name }}</h2>
+            <p>{{ discription }}</p>
+            <button><a href=/edit-profile/{{ username }}>Edit Profile</a></button>
+        </div>
+    </div>
+
+
+    <div class="gallery">
+        {% for photo in photo_profile %}
+        <figure class="photo-item">
+            <form action="post/place/{{ photo }}" method="post" enctype="multipart/form-data">
+            <div class="photo">
+                <button class="butt-photo">
+                    <img src="../../static/blog_app/img/{{ photo }}" alt="Photo {{ forloop.counter }}">
+                </button>
+            </div>
+            </form>
+        </figure>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bavilogram</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'blog_app/css/home.css' %}">
+</head>
+<body>
+    {% csrf_token %}
+    <div class="user-login-register">
+        <form class="search-container" onsubmit="handleSearch(event)">
+            <input type="text" name="query" placeholder="Введіть пошуковий запит">
+            <input type="submit" value="Шукати">
+        </form>
+        <script>
+            function handleSearch(event) {
+                event.preventDefault();
+                const query = document.querySelector('input[name="query"]').value;
+                window.location.href = `http://127.0.0.1:8000/${encodeURIComponent(query)}`;
+            }
+        </script>
+        <a href="http://127.0.0.1:8000/{{ username_csrftoken }}/"><img class="img-user" src="{% static 'blog_app/img/' %}{{ user_profile_photo }}" alt=""></a>
+    </div>
+
+    <div class="posts">
+        {% for post in posts %}
+        <div class="post">
+            <div class="post-header">
+                <a href="http://127.0.0.1:8000/{{ post.username }}/post/{{ post.id_photo }}"><img class="post-profile-pic" src="{% static 'blog_app/img/' %}{{ post.photo_username }}" alt="Profile Picture"></a>
+                <a href="http://127.0.0.1:8000/{{ post.username }}/post/{{ post.id_photo }}"><span class="post-username">{{ post.username }}</span></a>
+            </div>
+            <img class="post-photo" src="{% static 'blog_app/img/' %}{{ post.photo }}" alt="Post Photo">
+            <div class="buttons">
+                <strong class="like-count">{{ post.count_like }}</strong>
+                <form action="/{{ post.username }}/post/{{ post.id_photo }}/likes-home" method="post" enctype="multipart/form-data">
+                    <button class="like-btn">
+                        <input type="hidden" name="posts" value="{{ id_photo_list }}">
+                        {% if post.user_liked %}
+                            <i id="heart" class="far fa-heart heart"></i>
+                        {% else %}
+                            <i id="heart" class="fa-heart heart filled fas"></i>
+                        {% endif %}
+                    </button>
+                </form>
+                <button class="comment-btn"><a href="http://127.0.0.1:8000/{{ post.username }}/post/{{ post.id_photo }}"><i class="fas fa-comment"></i></a> Коментарі</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

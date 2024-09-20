@@ -1,0 +1,512 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Світлий фон */
+    color: #333; /* Темний текст */
+}
+
+.container1 {
+    max-width: 960px;
+    padding: 0 20px;
+}
+
+header {
+    background-color: #405de6; /* Синій колір */
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тінь */
+    border-bottom: 1px solid #fff; /* Білий колір */
+    height: 60px;
+}
+
+header .container h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #fff; /* Білий текст */
+    display: inline;
+}
+
+
+header nav ul {
+    padding: 0;
+}
+
+
+header nav ul li {
+    display: inline;
+}
+
+
+.edit {
+    margin-left: 300px;
+    color: #0c2660;
+}
+.photo-change {
+    background-color: rgb(240, 240, 240);
+}
+a {
+    text-decoration: none;
+    color: #fff; /* Білий текст */
+}
+input {
+    width: 150px;
+    height: 10px;
+  
+    margin-top: 5%;
+    margin-left: 20%;
+    padding: 15px;
+    
+    font-size: 16px;
+    font-family: 'Abel', sans-serif;
+    color: #1945ab;
+  
+    outline: none;
+    border: none;
+  
+    border-radius: 5px 5px 5px 5px;
+    transition: 0.2s linear;
+    
+}
+
+.profile {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 4px solid #fff; /* Білий колір */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тінь */
+}
+
+
+
+.profile-info p {
+    margin: 5px 0;
+    color: #666; /* Сірий текст */
+    font-size: 16px; /* Розмір тексту */
+    line-height: 1.5; /* Висота рядка */
+}
+.edit-new {
+    margin-left: 65px;
+    margin-top: 15px;
+}
+
+
+
+button {
+    background-color: #405de6; /* Синій колір */
+    color: #fff; /* Білий текст */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+.gallery {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тінь */
+}
+
+.photo img {
+    width: 300px;
+    height: 200px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.photo:hover img {
+    transform: scale(1.05); /* Збільшуємо розмір зображення при наведенні */
+}
+
+.photo:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(64, 93, 230, 0), rgba(64, 93, 230, 0.8)); /* Градієнт від прозорого до синього */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.photo:hover:before {
+    opacity: 1;
+}
+
+.photo:hover h3 {
+    opacity: 1;
+}
+
+.photo h3 {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    margin: 0;
+    color: #fff; /* Білий текст */
+    font-size: 18px; /* Розмір тексту */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Додайте ці стилі до вашого styles.css файлу */
+
+
+header nav ul li a {
+    color: #fff; /* Білий текст */
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #405de6; /* Синій колір */
+    border: 2px solid #405de6; /* Синя рамка */
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+header nav ul li button {
+    text-decoration: none;
+    color: #fff; /* Білий текст */
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #405de6; /* Синій колір */
+    border: 2px solid #405de6; /* Синя рамка */
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+header nav ul li a:hover {
+    background-color: #fff; /* Білий фон */
+    color: #405de6; /* Синій колір */
+    border-color: #405de6; /* Синя рамка */
+}
+
+header nav ul li button:hover {
+    background-color: #fff; /* Білий фон */
+    color: #405de6; /* Синій колір */
+    border-color: #405de6; /* Синя рамка */
+}
+
+.photo-div {
+    position: relative;
+    display: inline-block;
+}
+
+.photo-div img {
+    cursor: pointer; /* Змінюємо вигляд курсору при наведенні на фото */
+}
+
+.photo-div input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Зробити поле вводу файлу невидимим */
+    cursor: pointer; /* Змінюємо вигляд курсору на вказівний */
+}
+
+.profile-info1 {
+    transform: translate(200px, -170px);
+}
+
+
+
+
+
+
+
+
+.container2edit, .container3edit {
+    width: calc(50% - 7px); /* Враховуємо межу */
+    height: 700px; /* Задаємо однакову висоту для обох контейнерів */
+    padding: 20px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 8px;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+
+.separator {
+    width: 5px;
+    height: 700px; /* Висота відповідає висоті контейнерів */
+    background-color: rgb(255, 255, 255); /* Колір межі */
+    display: inline-block;
+    vertical-align: top; /* Вирівнюємо за верхнім краєм контейнерів */
+}
+
+
+
+
+.edit-new2 {
+    margin-left: 170px;
+    margin-top: 25px;
+}
+
+.oppassword {
+    margin-left: 145px;
+}
+
+.ppassword {
+    margin-left: 40px;
+}
+
+
+#custom-file-upload {
+    min-width: 900px;
+    max-width: 900px;
+    max-height: 150px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 9999; /* ensure it's above everything else */
+}
+
+#custom-file-upload-2 {
+    min-width: 900px;
+    position: absolute;
+    top: 125%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 9999; /* ensure it's above everything else */
+}
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+    display: none; /* initially hide */
+    z-index: 9998; /* ensure it's above everything except the code container */
+}
+
+  
+.custom-file-label {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+#selected-image {
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px;
+    margin-left: 45px;
+}
+  
+.post_input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    opacity: 0; /* Зробити поле вводу файлу невидимим */
+    cursor: pointer; /* Змінюємо вигляд курсору на вказівний */
+}
+
+#text-h {
+    margin-right: 300px;
+    position: relative;
+    top: -40px; /* зміщення вверх на 50px */
+    left: 650px; /* зміщення вправо на 100px */
+    width: 215px;
+}
+
+#text-input {
+    margin-right: 300px;
+    position: relative;
+    top: -50px; /* зміщення вверх на 50px */
+    left: 645px; /* зміщення вправо на 100px */
+    width: 215px;
+    height: 100px;
+    resize: none; /* заборона зміни розміру */
+}
+
+.butt-publish {
+    position: relative;
+    top: 1150px; /* зміщення вверх на 50px */
+    left: 470px; /* зміщення вправо на 100px */
+    width: 300px;
+}
+
+#post_input3 {
+    resize: none;
+    width: 900px;
+    height: 800px;
+}
+
+.photo_profile {
+    display: block; /* Показати зображення за замовчуванням */
+}
+
+.hidden {
+    display: none; /* Приховати зображення */
+}
+
+.butt-photo {
+    background-color: rgb(240, 240, 240); /* Синій колір */
+    color: rgb(70, 93, 221); /* Білий текст */
+    font-size: 36px; /* Збільшуємо розмір тексту */
+}
+
+#window {
+    display: none;
+    position: fixed;
+    top: 155px;
+    left: 22%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Show the window when targeted */
+#window:target {
+    display: block;
+}
+
+.ul-go-out {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.ul-close {
+    margin-left: 4px;
+    padding: 5px;
+}
+
+.search-container {
+    width: 650px;
+    height: 50px;
+    margin-top: -62px;
+    margin-right: 0; /* Adjust this as needed to move left */
+    margin-left: 200px; /* Add margin-left to move the container left */
+}
+.search-container input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    height: 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+}
+.search-container input[type="submit"] {
+    padding: 10px 20px;
+    height: 40px;
+    border: none;
+    border-radius: 25px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+    outline: none;
+}
+.search-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.img-user-a {
+    display: block; /* Ensure it's block-level */
+    width: 70px; /* Match the width of img-user */
+    height: 70px; /* Match the height of img-user */
+    border-radius: 50%; /* Ensure it's circular */
+    overflow: hidden; /* Hide overflow */
+    margin-left: 1160px; /* Adjust this as needed */
+    margin-top: -40px;
+}
+
+.img-user {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.img-user:hover {
+    transform: scale(1.05); /* Enlarge the image on hover */
+}
+
+
+.img-user-a-discription {
+    display: block; /* Ensure it's block-level */
+    width: 70px; /* Match the width of img-user */
+    height: 70px; /* Match the height of img-user */
+    border-radius: 50%; /* Ensure it's circular */
+    overflow: hidden; /* Hide overflow */
+    margin-left: 1160px; /* Adjust this as needed */
+    margin-top: -40px;
+}
+
+.img-user-discription {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.img-user-discription:hover {
+    transform: scale(1.05); /* Enlarge the image on hover */
+}
+
+
+#text-input-p {
+    position: relative;
+    top: -60px; /* зміщення вверх на 50px */
+    left: 660px; /* зміщення вправо на 100px */
+    width: 215px;
+    height: 100px;
+    color: #007bff;
+}
+
+
+
+.img-user-a2 {
+    display: block; /* Ensure it's block-level */
+    width: 70px; /* Match the width of img-user */
+    height: 70px; /* Match the height of img-user */
+    border-radius: 50%; /* Ensure it's circular */
+    overflow: hidden; /* Hide overflow */
+    margin-left: 1160px; /* Adjust this as needed */
+    margin-top: -40px;
+}

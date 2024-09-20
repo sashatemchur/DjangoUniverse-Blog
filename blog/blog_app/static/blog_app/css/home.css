@@ -1,0 +1,196 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* User Profile and Buttons */
+register-user, .login-user {
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  height: 42px;
+  padding: 10px 28px;
+  border-radius: 50px;
+  transition: all .2s ease-out;
+}
+
+
+.user-login-register {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тінь */
+}
+
+.img-user  {
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  margin-left: 10px;
+  display: block;
+  transition: transform 0.3s;
+  margin-top: -15px;
+}
+
+.img-user:hover  {
+  transform: scale(1.05); /* Збільшуємо розмір зображення при наведенні */
+}
+
+
+/* Posts Section */
+.posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.post {
+  width: 450px;
+  border: 1px solid #dbdbdb;
+  margin-bottom: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+
+.post-profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.post-username {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.post-photo {
+  width: 100%;
+  display: block;
+}
+
+/* Buttons and Actions */
+.buttons {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+
+.like-btn, .comment-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.like-btn i, .comment-btn i {
+  margin-right: 5px;
+  font-size: 24px;
+}
+
+.like-btn:hover i, .comment-btn:hover i {
+  color: #007bff;
+}
+
+.like-count {
+  margin-right: 10px;
+}
+
+/* Heart Icon */
+.heart {
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.heart.filled {
+  color: rgb(17, 17, 197);
+}
+
+/* Comment Section */
+.comment-text {
+  font-size: 1.2em;
+  line-height: 1.5;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+}
+
+/* Search Bar */
+.search-container {
+  margin-right: 325px;
+}
+
+.search-container input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-container input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+.search-container input[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 10px;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.search-container input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+
+.post-photo-topic {
+  width: 100%;
+  display: block;
+  font-weight: bold;  
+  font-family: 'Times New Roman';  
+  padding: 15px;
+}
+
+

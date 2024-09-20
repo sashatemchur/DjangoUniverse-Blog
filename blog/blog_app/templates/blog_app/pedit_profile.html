@@ -1,0 +1,112 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/user.css' %}">
+</head>
+<body>
+{% csrf_token %}
+<header>
+    <div class="container1">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/edit_profile/{{ username }}/">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+                <li><button onclick="showCode()">Create Post</button></li>
+                <form action="/{{ username }}/post" method="post" enctype="multipart/form-data">
+                <div id="custom-file-upload">
+                    <label for="file-input" class="custom-file-label">Оберіть файл</label>
+                    <input type="file" id="file-input" name="photo" class="post_input" onchange="showImage(this)">
+                    <img id="selected-image" src="#" alt="Обране зображення" style="display: none;">
+                    <button class="butt-publish">Publish</button>
+                </div>
+                <script>
+                    function showImage(input) {
+                      var file = input.files[0];
+                      var img = document.getElementById('selected-image');
+                      var label = document.querySelector('.custom-file-label');
+                    
+                      if (file) {
+                        var reader = new FileReader();
+                    
+                        reader.onload = function(e) {
+                          img.src = e.target.result;
+                          img.style.display = 'block';
+                          label.textContent = file.name;
+                        }
+                    
+                        reader.readAsDataURL(file);
+                      } else {
+                        img.src = '#';
+                        img.style.display = 'none';
+                        label.textContent = 'Оберіть файл';
+                      }
+                    }
+                </script>
+                </form>
+                <div id="overlay" onclick="hideCode()"></div>
+                <script>
+                    function showCode() {
+                        document.getElementById('custom-file-upload').style.display = 'block';
+                        document.getElementById('overlay').style.display = 'block';
+                    }
+            
+                    function hideCode() {
+                        document.getElementById('custom-file-upload').style.display = 'none';
+                        document.getElementById('overlay').style.display = 'none';
+                    }
+                </script>
+            </ul>
+        </nav>
+    </div>
+</header>
+    
+<div class="container2edit">
+    <h4 class="edit">Edit Profile</h4>
+    <br>
+    <div class="profile">
+        <form action="/edit_profile/{{ username }}/" method="post" enctype="multipart/form-data">
+            <div class="photo-div">
+                <label for="file-input">
+                    <img src={{ photo }}>
+                </label>
+                <input type="file" id="file-input" name="photo" value="{{ photo }}">
+            </div>
+            <div class="profile-info1">
+                <h2 class="username1">{{ username }}</h2>           
+                <input class="form-input2" id="txt-input2" type="text" name="names" value="{{ name }}"  required>
+                <br>
+                <input class="form-input2" id="txt-input2" type="text" name="discription" value="{{ discription }}"  required>
+                <br>
+                <button class="edit-new">Edit Profile</button>
+        </div>
+        </form>
+    </div>
+</div>
+
+<div class="separator"></div>
+
+<div class="container3edit">
+    <form action="/edit_profile_/{{ username }}/" method="post" enctype="multipart/form-data">
+        <div class="profile-info2">
+            <h2 class="username1">Edit Username or password</h2>           
+            <input class="form-input2" id="txt-input2" type="text" name="username" value="{{ username }}"  required>
+            <br>
+            <input class="form-input2" id="txt-input2" type="text" name="password" placeholder="Old password" >
+            <br>
+            <input class="form-input2" id="txt-input2" type="text" name="new_password" placeholder="New password" >
+            <br>
+            <input class="form-input2" id="txt-input2" type="text" name="repeat_new_password" placeholder="Repeat new password" >
+            <br>
+            <p class="ppassword">Паролі не співпадають або меньше 8 символів</p>
+            <button class="edit-new2">Save</button>
+    </div>
+    </form>
+</div>
+
+</body>
+</html>

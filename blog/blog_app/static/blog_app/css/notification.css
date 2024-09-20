@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-list {
+    width: 660px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+}
+
+.chat-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.chat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat-item:last-child {
+    border-bottom: none;
+}
+
+.chat-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.last-message {
+    color: #666;
+    font-size: 14px;
+}
+
+.new-message .last-message {
+    font-weight: bold;
+    color: #000;
+}
+
+.message-count {
+    background-color: #ff6347;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.new-message .message-count {
+    display: inline-block;
+}
+
+.chat-item:not(.new-message) .message-count {
+    display: none;
+}
+
+.close-all-btn {
+    position: absolute;
+    top: -15px; /* Розташування поверх контейнера, трохи вище його меж */
+    left: 100%;
+    transform: translateX(-50%); /* Центрування по горизонталі */
+    background-color: rgb(195, 12, 12);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.close-all-btn:hover {
+    background-color: darkred;
+}
+
+
+.home-button {
+    width: 25px;
+    height: 25px;
+    background-color: rgba(255, 0, 0, 0.2); /* Прозорий світло-червоний */
+    border: 2px solid darkred; /* Темно-червоний обвід */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Анімація зміни кольору */
+    margin-top: -300px;
+    transform: translateX(-1050%); /* Центрування по горизонталі */
+}
+
+.home-button:hover {
+    background-color: lightcoral; /* Світло-червоний колір при наведенні */
+}
+
+.home-button svg {
+    width: 24px;
+    height: 24px;
+}

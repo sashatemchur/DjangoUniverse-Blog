@@ -1,0 +1,48 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bavilogram</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/register.css' %}">
+
+
+</head>
+<body >
+    <div class="overlay">
+        
+           <div class="con">
+           <header class="head-form">
+              <h2>Log in</h2>
+           </header>
+           <br>
+           <form action="/login_/" method="post">
+           <div class="field-set">
+                 <input class="form-input2" id="txt-input2" type="text" placeholder="@UserName" name="username" required>
+              <br>
+                  <input class="form-input2" id="pass2" type="password" placeholder="Password" id="txt-input"  name="password" required>
+              <br>
+              <h4 class="pregister-pasword-h4">Такий користувач не існує</h4>
+              <button class="sign-in1"> Log in </button>
+              <a href="http://127.0.0.1:8000/register/"><button class="register-user" type="button"> Sign Up</button></a>
+           </div>
+
+         
+          
+           <div class="other_register">
+              <button class="btn submits frgt-pass">Forgot Password</button>
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              </button>
+           </div>
+             
+           </form>
+
+          </div>
+        
+        
+        
+        </div>
+</body>
+</html>

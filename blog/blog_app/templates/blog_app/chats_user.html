@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список Чатів</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/chats_user.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="chat-sidebar">
+            <div class="sidebar-header">
+                <a href="/">
+                <button class="home-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    </svg>
+                </button>
+                </a>
+                <h2>Мої Чати</h2>
+                <form  onsubmit="handleSearch(event)">
+                    <input type="text" name="query"  placeholder="Пошук чату..." />
+                </form>
+                <script>
+                    function handleSearch(event) {
+                        event.preventDefault();
+                        const query = document.querySelector('input[name="query"]').value;
+                        window.location.href = `http://127.0.0.1:8000/chats/sasha/${encodeURIComponent(query)}`;
+                    }
+                </script>
+            </div>
+            <div class="chat-list">
+
+                <a href="/chats/{{ username }}">
+                <div class="chat-item">
+                    <div class="chat-avatar">
+                        <img src="{% static 'blog_app/img/icon-favorite-is-white-blue-background-bookmark-linear-style_166116-6020.jpg' %}" alt="Збережене">
+                    </div>
+                    <div class="chat-info">
+                        <h4>Збережене</h4>
+                        <p>{{ last_message }}</p>
+                    </div>
+                    <div class="chat-time">12:30</div>
+                </div>
+                </a>
+                {% for users_message in users_messages %}
+                <a href="/chats/{{ username }}/{{ users_message.id_chat }}">
+                <div class="chat-item">
+                    <div class="chat-avatar">
+                        <img src="../../static/blog_app/img/{{ users_message.photo_chat_user }}" alt="Аватар">
+                    </div>
+                    <div class="chat-info">
+                        <h4>{{ users_message.name_chat_user }}</h4>
+                        <p>{{ users_message.last_message_chat }}</p>
+                    </div>
+                    <div class="chat-time">12:30</div>
+                </div> 
+                {% endfor %}
+                </a>
+                <!-- Додайте інші чати за необхідності -->
+            </div>
+        </div>
+        <div class="chat-content">
+            <div class="chat-header">
+                <h2>Збережене</h2>
+            </div>
+            <div class="chat-messages">
+                <!-- Повідомлення чату -->
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                <form action="/chats/{{ username }}/message-delete" method="post" enctype="multipart/form-data"> 
+                    <input type="hidden" name="message" value="{{ message }}">
+                    <button id="three-dots" class="fas fa-ellipsis-v three-dots"></button>
+                </form>
+                {% endfor %}
+            </div>
+            <form action="/chats/{{ username }}/message-change" method="post" enctype="multipart/form-data">
+            <div class="chat-input">
+                <input type="text" placeholder="Введіть повідомлення..." name="notes" />
+                <button>Надіслати</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

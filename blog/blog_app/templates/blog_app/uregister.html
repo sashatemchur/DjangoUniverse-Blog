@@ -1,0 +1,53 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bavilogram</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/register.css' %}">
+
+
+</head>
+<body >
+    <div class="overlay">
+        
+           <div class="con">
+           <header class="head-form">
+              <h2>Sign Up</h2>
+           </header>
+           <br>
+           <form action="/register_/" method="post">
+           <div class="field-set">
+
+                  <input class="form-input" type="text" placeholder="Name and Surname" id="txt-input" name="name_surname" required>
+               <br>
+                 <input class="form-input" id="txt-input" type="text" placeholder="@UserName" name="username" required>
+              <br>
+                <h4 class="pregister-pasword-h4">Цей юзернейм зайнято оберіть інший</h4>
+                  <input class="form-input" type="password" placeholder="Password" id="txt-input"  name="password" required>
+              <br>
+                  <input class="form-input" type="password" placeholder="Repeat Password" id="txt-input"  name="repeat_password" required>
+              <br>
+              <button class="sign-in2"> Sign Up </button>
+              <a href="http://127.0.0.1:8000/login/"><button class="login-user" type="button">Log In</button></a>
+           </div>
+
+          
+          
+           <div class="other_register">
+              <button class="btn submits frgt-pass">Forgot Password</button>
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+              </button>
+           </div>
+
+           </form>  
+
+          </div>
+        
+        
+        
+        </div>
+</body>
+</html>

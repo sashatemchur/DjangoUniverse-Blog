@@ -1,0 +1,41 @@
+{% load static %}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'blog_app/css/topics.css' %}">
+</head>
+<body>
+{% csrf_token %}
+<header>
+    <div class="container1">
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/topics">Topics</a></li>
+                <a class="img-user-a2" href="http://127.0.0.1:8000/{{ username_csrftoken }}/"><img class="img-user" src="{{ user_profile_photo }}" alt=""></a>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+    <div class="gallery">
+        {% for photo in photo_profile %}
+        <figure class="photo-item">
+            <form action="/{{ username }}/topics/place/{{ photo }}" method="post" enctype="multipart/form-data">
+            <div class="photo">
+                <button class="butt-photo">
+                    <img src="../../static/blog_app/img/{{ photo }}" alt="{{ photo }}">
+                    <input type="hidden" name="comment" value="{{ id_topics }}">
+                </button>
+            </div>
+            </form>
+        </figure>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
